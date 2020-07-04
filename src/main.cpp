@@ -12,8 +12,11 @@ int main() {
     Utils::clearScreen();
     
     Game* tetris = new Game();
+    tetris->init();
+    tetris->generatePiece();
     tetris->render();
 
     Utils::moveCursor(HEIGHT + 20, 1);
+
     return 0;
 }
