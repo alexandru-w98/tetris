@@ -5,9 +5,6 @@
 
 using namespace std;
 
-#define HEIGHT 20
-#define WIDTH 10
-
 int main() {
     Utils::clearScreen();
     
@@ -15,8 +12,9 @@ int main() {
     tetris->init();
     tetris->generatePiece();
     tetris->render();
+    tetris->getUserInput();
 
-    Utils::moveCursor(HEIGHT + 20, 1);
+    Utils::moveCursor(DEFAULT_HEIGHT + 20, 1);
 
     return 0;
 }

@@ -9,7 +9,7 @@ Map::Map(int width, int height): width(width), height(height) {
     for (int i = 0; i < this->height; ++i) {
         this->map[i] = new char[this->width];
         for (int j = 0; j < this->width; ++j) {
-            this->map[i][j] = '0';
+            this->map[i][j] = ' ';
         }
     }
 }
@@ -18,7 +18,7 @@ void Map::render(int xStart, int yStart) const{
     for (int i = 0; i < this->height; ++i) {
         Utils::moveCursor(yStart + i, xStart);
         for (int j = 0; j < this->width; ++j) {
-            cout << this->map[i][j];
+            cout << this->map[i][j] << flush;
         }
     }
 }
