@@ -34,14 +34,6 @@ void Game::init(void) const {
 }
 
 void Game::render(void) const {
-    int piecePositionOffset = (DEFAULT_WIDTH - 2) / 2 - 1;
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            if (this->currentPiece[i * 4 + j] != '.') {
-                this->map->map[currentPieceRow + i][piecePositionOffset + j] = this->currentPiece[i * 4 + j];
-            }
-        }
-    }
     this->map->render(XSTART, YSTART);
 }
 
@@ -106,6 +98,17 @@ void Game::generatePiece(void) {
             this->currentPieceHeight = 2;
             break;
     };
+
+    this->currentPieceRow = 0;
+
+    int piecePositionOffset = (DEFAULT_WIDTH - 2) / 2 - 1;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (this->currentPiece[i * 4 + j] != '.') {
+                this->map->map[currentPieceRow + i][piecePositionOffset + j] = this->currentPiece[i * 4 + j];
+            }
+        }
+    }
 }
 
 void Game::getUserInput(void) {
@@ -232,6 +235,21 @@ void Game::movePiece(char direction) {
                     }
                 }
             }
+            this->currentPieceRow += 1;
             break;
+    }
+}
+
+void Game::gameLoop(void) {
+    while(1) {
+        Utils::waitDelay(600);
+        if (this->isValidMovement('D')) {
+            this->movePiece('D');
+        } else {
+            this->generatePiece();
+            this->render();
+        }
+        this->map->render(XSTART, YSTART);
+        Utils::moveCursor(DEFAULT_HEIGHT + 20, 1);
     }
 }

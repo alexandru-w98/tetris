@@ -12,9 +12,8 @@ int main() {
     tetris->init();
     tetris->generatePiece();
     tetris->render();
-    tetris->getUserInput();
-
-    Utils::moveCursor(DEFAULT_HEIGHT + 20, 1);
+    //tetris->getUserInput();
+    tetris->gameLoop();
 
     return 0;
 }
